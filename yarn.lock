@@ -2711,6 +2711,16 @@ chalk@^4.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
+chess.js@^1.0.0-beta.6:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/chess.js/-/chess.js-1.2.0.tgz#0f963dcf61ef437ccfad06afcbe06ed6978bbf98"
+  integrity sha512-QWdfpAkMslQ48hDDoEzEko6GbYTAKKx4UdXAPEF8nFnAuqp+woyL8LHSbziRP8u1aMAbnlOF0YkXF4ui0Nsubg==
+
+chessground@^9.0.2:
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/chessground/-/chessground-9.1.1.tgz#2362f1b5775755c468da3941b10c80e6e32b3340"
+  integrity sha512-X4xrBICrixaLATCn+jGEzk58UXcas+9QqJnwVq9nT7AaX2M1CJLMA0vC7noG0s6Tr2zoAHZ1FOviE5b05MgduQ==
+
 chokidar@^4.0.1, chokidar@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-4.0.3.tgz#7be37a4c03c9aee1ecfe862a4a23b2c70c205d30"
@@ -7697,6 +7707,14 @@ vue-router@^4.5.0:
   integrity sha512-HDuk+PuH5monfNuY+ct49mNmkCRK4xJAV9Ts4z9UFc4rzdDnxQLyCMGGc8pKhZhHTVzfanpNwB/lwqevcBwI4w==
   dependencies:
     "@vue/devtools-api" "^6.6.4"
+
+vue3-chessboard@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/vue3-chessboard/-/vue3-chessboard-1.3.3.tgz#d437f1bfa9be0e6dc1c641fc7e8503186483a6dc"
+  integrity sha512-bCAxzZESnRkmI3dlAS9U5v4OrCA8bvMO8p5FI9bJezcramZenmfhTjlSDZeCZds08OYDMAuXt3qPlUh9G7ShXg==
+  dependencies:
+    chess.js "^1.0.0-beta.6"
+    chessground "^9.0.2"
 
 vue@^3.5.13:
   version "3.5.13"
