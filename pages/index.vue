@@ -53,21 +53,23 @@ watch(
   async (newValue) => {
     console.log("move", newValue);
 
-    const { data } = await $fetch("/api/next-move", {
+    const response = await $fetch("/api/next-move", {
       body: {
         fen: newValue?.after,
       },
       method: "POST",
     });
 
-    console.log("data", data);
+    console.log("data", response);
+    information.value.boardCreated?.move(response.move);
+    // information.value.boardCreated?.setFEN(response.fen);
   }
 );
 </script>
 
 <template>
   <div>
-    <!-- <div>{{ information }}</div> -->
+    <div>{{ information.move }}</div>
     <TheChessboard
       @board-created="boardCreated"
       @checkmate="checkmate"
