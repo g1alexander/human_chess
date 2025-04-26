@@ -13,6 +13,12 @@ interface StateEvents {
   check: PieceColor | null;
   promotion: PromotionEvent | null;
   move: MoveEvent | null;
+  configGame: ConfigGame;
+}
+
+interface ConfigGame {
+  color: PieceColor;
+  difficulty: number;
 }
 
 export const useChessBoard = () =>
@@ -24,6 +30,10 @@ export const useChessBoard = () =>
     check: null,
     promotion: null,
     move: null,
+    configGame: {
+      color: "white",
+      difficulty: 10,
+    },
   }));
 
 export function useEventsChessBoard() {
