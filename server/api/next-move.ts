@@ -5,11 +5,13 @@ export default defineEventHandler<Promise<ApiResponse<string | null>>>(
   async (event) => {
     const body = await readBody<MoveRequest>(event);
     const fen = body.fen;
+    const skillLevel = body.skillLevel;
 
     return new Promise((resolve, reject) => {
       const engine = spawn("stockfish");
 
       engine.stdin.write("uci\n");
+      engine.stdin.write(`setoption name Skill Level value ${skillLevel}\n`);
       engine.stdin.write(`position fen ${fen}\n`);
       engine.stdin.write("go depth 10\n");
 

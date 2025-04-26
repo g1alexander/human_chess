@@ -6,4 +6,5 @@ export interface ApiResponse<T = null> {
 
 export interface MoveRequest {
   fen: string;
+  skillLevel: number;
 }
