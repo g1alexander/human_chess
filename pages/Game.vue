@@ -24,7 +24,6 @@ onMounted(async () => {
     chessBoard.value.boardCreated?.setConfig({
       orientation: "black",
     });
-
     const move = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
     await nextMove(move);
   }
@@ -39,7 +38,6 @@ watch(
     ) {
       await nextMove(newValue?.after || "");
     }
-
     if (
       chessBoard.value.move?.color === "w" &&
       chessBoard.value.configGame.color === "white"
@@ -48,16 +46,57 @@ watch(
     }
   }
 );
+
+watch(
+  () => chessBoard.value.checkmate,
+  (newValue) => {
+    console.log("checkmate", newValue);
+  }
+);
+
+watch(
+  () => chessBoard.value.stalemate,
+  (newValue) => {
+    console.log("stalemate", newValue);
+  }
+);
+watch(
+  () => chessBoard.value.draw,
+  (newValue) => {
+    console.log("draw", newValue);
+  }
+);
+watch(
+  () => chessBoard.value.check,
+  (newValue) => {
+    console.log("check", newValue);
+  }
+);
+watch(
+  () => chessBoard.value.promotion,
+  (newValue) => {
+    console.log("promotion", newValue);
+  }
+);
+
+//TODO: generar alertas de checkmate, stalemate y draw
+//TODO: reiniciar el juego
+//TODO: chat + LLM
 </script>
 
 <template>
-  <TheChessboard
-    @board-created="boardCreated"
-    @checkmate="checkmate"
-    @stalemate="stalemate"
-    @draw="draw"
-    @check="check"
-    @promotion="promotion"
-    @move="move"
-  />
+  <div class="flex w-full items-center justify-between">
+    <TheChessboard
+      class="w-[50vh]"
+      @board-created="boardCreated"
+      @checkmate="checkmate"
+      @stalemate="stalemate"
+      @draw="draw"
+      @check="check"
+      @promotion="promotion"
+      @move="move"
+    />
+
+    <ChatContainer class="w-[50vh]" />
+  </div>
 </template>
