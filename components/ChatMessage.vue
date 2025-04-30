@@ -11,7 +11,7 @@ const formatTime = (date: Date) => {
 </script>
 
 <template>
-  <div
+  <article
     class="flex items-start gap-3 p-4 rounded-lg max-w-[80%]"
     :class="[
       isBot
@@ -19,7 +19,8 @@ const formatTime = (date: Date) => {
         : 'bg-chess-user/10 text-chess-user self-end',
     ]"
   >
-    <div class="shrink-0 mt-1">
+    <!-- Avatar -->
+    <figure class="shrink-0 mt-1">
       <div
         :class="[
           'p-2 rounded-full',
@@ -32,16 +33,17 @@ const formatTime = (date: Date) => {
           :class="isBot ? 'text-chess-bot' : 'text-chess-user'"
         />
       </div>
-    </div>
+    </figure>
 
-    <div class="flex flex-col">
-      <div class="text-sm font-medium">
+    <!-- Contenido del mensaje -->
+    <section class="flex flex-col">
+      <header class="text-sm font-medium">
         {{ isBot ? "AjedrezBot" : "Tú" }}
-      </div>
-      <div class="mt-1 text-sm text-foreground">{{ message }}</div>
-      <div class="mt-1 text-xs text-muted-foreground">
+      </header>
+      <p class="mt-1 text-sm text-foreground">{{ message }}</p>
+      <p class="mt-1 text-xs text-muted-foreground" :datetime="timestamp">
         {{ formatTime(timestamp) }}
-      </div>
-    </div>
-  </div>
+      </p>
+    </section>
+  </article>
 </template>

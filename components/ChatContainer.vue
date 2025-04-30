@@ -73,16 +73,18 @@ const handleSendMessage = (text: string) => {
 </script>
 
 <template>
-  <div class="flex flex-col h-full">
-    <div class="bg-background p-4 border-b">
+  <main class="flex flex-col h-full">
+    <!-- Encabezado del chat -->
+    <header class="bg-background p-4 border-b">
       <h2 class="text-xl font-bold flex items-center gap-2">
         <Icon name="lucide:bot" class="h-5 w-5" />
         Chat de Ajedrez
       </h2>
-    </div>
+    </header>
 
-    <div ref="scrollAreaRef" class="flex-1 p-4 overflow-y-auto">
-      <div class="flex flex-col gap-4">
+    <!-- Área de mensajes -->
+    <section ref="scrollAreaRef" class="flex-1 p-4 overflow-y-auto">
+      <ul class="flex flex-col gap-4">
         <ChatMessage
           v-for="message in messages"
           :key="message.id"
@@ -91,7 +93,8 @@ const handleSendMessage = (text: string) => {
           :timestamp="message.timestamp"
         />
 
-        <div
+        <!-- Indicador de que el bot está escribiendo -->
+        <li
           v-if="isTyping"
           class="flex items-start gap-3 p-4 rounded-lg bg-chess-bot/10 text-chess-bot self-start max-w-[80%]"
         >
@@ -101,20 +104,21 @@ const handleSendMessage = (text: string) => {
             </div>
           </div>
           <div class="flex items-center gap-1">
-            <div class="w-2 h-2 bg-chess-bot rounded-full animate-pulse"></div>
-            <div
+            <span class="w-2 h-2 bg-chess-bot rounded-full animate-pulse" />
+            <span
               class="w-2 h-2 bg-chess-bot rounded-full animate-pulse delay-150"
-            ></div>
-            <div
+            />
+            <span
               class="w-2 h-2 bg-chess-bot rounded-full animate-pulse delay-300"
-            ></div>
+            />
           </div>
-        </div>
-      </div>
-    </div>
+        </li>
+      </ul>
+    </section>
 
-    <div class="p-4 border-t">
+    <!-- Entrada de mensaje -->
+    <footer class="p-4 border-t">
       <ChatInput @send-message="handleSendMessage" />
-    </div>
-  </div>
+    </footer>
+  </main>
 </template>
