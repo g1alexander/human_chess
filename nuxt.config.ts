@@ -11,4 +11,8 @@ export default defineNuxtConfig({
     "@nuxt/test-utils",
     "@nuxtjs/tailwindcss",
   ],
+
+  runtimeConfig: {
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+  },
 });
