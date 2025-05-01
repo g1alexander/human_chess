@@ -7,7 +7,7 @@ const { boardCreated, checkmate, stalemate, draw, check, promotion, move } =
 
 const chessBoard = useChessBoard();
 
-const nextMove = async (fen: string) => {
+const nextMove = async (fen: string): Promise<string> => {
   const response = await $fetch("/api/next-move", {
     body: {
       fen,
@@ -15,8 +15,10 @@ const nextMove = async (fen: string) => {
     },
     method: "POST",
   });
-  if (response.status !== 200) return;
+  if (response.status !== 200) return "";
   chessBoard.value.boardCreated?.move(response.data!);
+
+  return response.data!;
 };
 
 onMounted(async () => {
@@ -42,7 +44,38 @@ watch(
       chessBoard.value.move?.color === "w" &&
       chessBoard.value.configGame.color === "white"
     ) {
-      await nextMove(newValue?.after || "");
+      const bestMove = await nextMove(newValue?.after || "");
+
+      const { data, error, status } = await $fetch("/api/evaluate-fen", {
+        body: {
+          fen: newValue?.after,
+        },
+        method: "POST",
+      });
+
+      if (status !== 200) return;
+
+      const type = chessBoard.value.checkmate
+        ? "checkmate"
+        : chessBoard.value.check
+        ? "check"
+        : newValue?.flags === "c"
+        ? "capture"
+        : "move";
+
+      const response = await $fetch("/api/generate-comment", {
+        body: {
+          type,
+          fen: newValue?.after,
+          lastMove: bestMove,
+          evaluatePosition: data,
+          moveNumber: chessBoard.value.boardCreated?.getHistory().length,
+          playerColor: newValue?.color,
+        },
+        method: "POST",
+      });
+
+      console.log("response", response);
     }
   }
 );
